@@ -43,7 +43,7 @@ func trailerSignal() {
 	time.Sleep(time.Millisecond * 70)
 }
 
-// Combines header, command and trail signal in full command
+// SendCommand combines header, command and trail signal in full command and sends it via gpio
 func SendCommand(command uint16) {
 	// set pin to output
 	// -- REFACTOR --

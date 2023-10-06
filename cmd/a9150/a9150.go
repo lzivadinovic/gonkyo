@@ -30,11 +30,6 @@ var A9150Cmd = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
-		//if len(args) != 1 {
-		//	fmt.Println("Should get only one arg")
-		//	os.Exit(1)
-		//}
-
 	},
 }
 
@@ -50,20 +45,10 @@ func addSubcommands() {
 	A9150Cmd.AddCommand(srcupCmd)
 	A9150Cmd.AddCommand(srcdownCmd)
 
+	A9150Cmd.AddCommand(d1Cmd)
+
 }
 
 func init() {
 	addSubcommands()
-
-	//cmd.rootCmd.AddCommand(a9150Cmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// a9150Cmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// a9150Cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

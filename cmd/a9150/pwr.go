@@ -11,28 +11,13 @@ import (
 // pwrCmd represents the pwr command
 var pwrCmd = &cobra.Command{
 	Use:   "pwr",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Power on/off",
+	Long: `Send power on or off command to you amp.
+This command is toggle, it does not care about your current state!`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("pwr called")
 	},
 }
 
 func init() {
-	//cmd.rootCmd.AddCommand(pwrCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// pwrCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// pwrCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
