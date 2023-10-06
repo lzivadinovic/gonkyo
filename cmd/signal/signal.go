@@ -1,36 +1,40 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2023 Lazar Zivadinovic <git@lzivadinovic.com>
 */
 package signal
 
 import (
 	"fmt"
+	"github.com/lzivadinovic/gonkyo/wrapper"
 	"github.com/spf13/cobra"
+	"strconv"
 )
 
 // SignalCmd represents the signal command
 var SignalCmd = &cobra.Command{
-	Use:   "signal",
-	Short: "Send custom message (hex/uint) to Onkyo-RI interface",
+	Use:   "signal [<uInt|hex>]",
+	Short: "Send custom message (hex/uInt) to Onkyo-RI interface",
 	Long: `You can use this command to send custom message to your onkyo-RI interface.
-You can use either hex or uint encoded values for your command.
-Program will then send blablabla`,
+Command can be hex or uInt, eg sending "0xD5" or "213" will yield equivalent result.`,
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("signal called")
-		//wrapper.SendCommand(230)
+		// Get arg and pars it as uint16
+		arg, err := strconv.ParseUint(args[0], 0, 0)
+		comm := uint16(arg)
+
+		if err != nil {
+			fmt.Println("Something went wrong while parsing command!")
+		}
+
+		for i := 0; i < repeatTimes; i++ {
+			wrapper.SendCommand(comm)
+		}
+
 	},
 }
 
+var repeatTimes int
+
 func init() {
-	//cmd.rootCmd.AddCommand(SignalCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// signalCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// signalCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	SignalCmd.Flags().IntVarP(&repeatTimes, "times", "t", 1, "times to repeat the command")
 }
