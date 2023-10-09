@@ -46,9 +46,11 @@ func trailerSignal() {
 // SendCommand combines header, command and trail signal in full command and sends it via gpio
 // This is public function from this package
 func SendCommand(command uint16) {
-	// set pin to output
+	// set pin to output and pull it low before header signal
 	// -- REFACTOR --
 	pin.Output()
+	pin.Low()
+	time.Sleep(time.Millisecond * 20)
 	// -- REFACTOR --
 	headerSignal()
 	for i := 0; i < 12; i++ {
